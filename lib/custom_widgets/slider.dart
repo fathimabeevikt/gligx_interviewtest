@@ -12,16 +12,26 @@ class SliderImage extends StatefulWidget {
   final Color color2;
   final Color color3;
 
-    SliderImage(this.categoryName, this.productName, this.productRate,
-      this.productImage,this.backgrounColor, this.color1, this.color2, this.color3);
+  SliderImage(
+      this.categoryName,
+      this.productName,
+      this.productRate,
+      this.productImage,
+      this.backgrounColor,
+      this.color1,
+      this.color2,
+      this.color3);
 
   @override
   State<SliderImage> createState() => _SliderImageState();
 }
 
 class _SliderImageState extends State<SliderImage> {
+  Color selectedColor = Colors.transparent;
+  bool clickSelectedColor = false;
   @override
   Widget build(BuildContext context) {
+    selectedColor = clickSelectedColor ? selectedColor : widget.color1;
     return Scaffold(
       body: Center(
         child: Padding(
@@ -30,18 +40,21 @@ class _SliderImageState extends State<SliderImage> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        widget.backgrounColor.withOpacity(0.7),
-                        widget.backgrounColor.withOpacity(0.3),
-                      ],
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                    ),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      widget.backgrounColor.withOpacity(0.7),
+                      widget.backgrounColor.withOpacity(0.3),
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                ),
                 height: MediaQuery.of(context).size.height / 2,
-                child: Image.asset(widget.productImage),
+                child: ColorFiltered(
+                    colorFilter:
+                        ColorFilter.mode(selectedColor, BlendMode.modulate),
+                    child: Image.asset(widget.productImage)),
               ),
               Positioned(
                   child: Padding(
@@ -113,12 +126,30 @@ class _SliderImageState extends State<SliderImage> {
                       children: [
                         ColorBox(
                           color: widget.color1,
+                          onTap: () {
+                            setState(() {
+                              clickSelectedColor = true;
+                              selectedColor = widget.color1;
+                            });
+                          },
                         ),
                         ColorBox(
                           color: widget.color2,
+                          onTap: () {
+                            setState(() {
+                              clickSelectedColor = true;
+                              selectedColor = widget.color2;
+                            });
+                          },
                         ),
                         ColorBox(
                           color: widget.color3,
+                          onTap: () {
+                            setState(() {
+                              clickSelectedColor = true;
+                              selectedColor = widget.color3;
+                            });
+                          },
                         ),
                       ],
                     ),

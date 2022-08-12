@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:gligx_test/provider/user_provider.dart';
 import 'package:gligx_test/screens/home.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => UserProvider()),
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

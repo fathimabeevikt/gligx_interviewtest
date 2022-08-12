@@ -12,6 +12,7 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
+  Color selectedColor = Colors.white;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,9 +86,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             "Category Name",
                             style: TextStyle(
                                 fontSize: 17,
-                               fontWeight: FontWeight.w100,
-                                color: AppColors.kprimarylightColor
-                            ),
+                                fontWeight: FontWeight.w100,
+                                color: AppColors.kprimarylightColor),
                           ),
                           Container(
                             decoration: BoxDecoration(
@@ -133,12 +133,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                 children: [
                                   ColorBox(
                                     color: Colors.purple,
+                                    onTap: () {
+                                      setState(() {
+                                        selectedColor = Colors.purple;
+                                      });
+                                    },
                                   ),
                                   ColorBox(
                                     color: Colors.blueGrey,
+                                    onTap: () {
+                                      setState(() {
+                                        selectedColor = Colors.blueGrey;
+                                      });
+                                    },
                                   ),
                                   ColorBox(
                                     color: Colors.yellowAccent,
+                                    onTap: () {
+                                      setState(() {
+                                        selectedColor = Colors.yellowAccent;
+                                      });
+                                    },
                                   ),
                                 ],
                               )
@@ -172,11 +187,15 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   height: MediaQuery.of(context).size.width / 1.5,
                   child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
-                      child: Image.asset(
-                        "assets/images/yellow_sofa.png",
-                        height: MediaQuery.of(context).size.width,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
+                      child: ColorFiltered(
+                        colorFilter:
+                            ColorFilter.mode(selectedColor, BlendMode.modulate),
+                        child: Image.asset(
+                          "assets/images/yellow_sofa.png",
+                          height: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        ),
                       )),
                 ),
               ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:badges/badges.dart';
+import 'package:gligx_test/screens/details_from_api.dart';
 import 'package:gligx_test/screens/details_screen.dart';
 
 import '../custom_widgets/trending_items.dart';
@@ -63,11 +64,11 @@ class _HomeState extends State<Home> {
           children: [
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DetailsScreen()),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //       builder: (context) => const DetailsScreen()),
+                // );
               },
               child: CarouselSlider(
                   items: Sliderlist,
@@ -79,15 +80,28 @@ class _HomeState extends State<Home> {
                       autoPlayInterval: const Duration(seconds: 3),
                       viewportFraction: .8)),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text(
-                "Trending Items",
-                style: TextStyle(
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.w700,
-                    fontSize: 27),
-              ),
+            Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Trending Items",
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700,
+                        fontSize: 27),
+                  ),
+                ),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const UserSCreen()),
+                      );
+                    },
+                    child: Text("Api Connection"))
+              ],
             ),
             InkWell(
                 onTap: () {

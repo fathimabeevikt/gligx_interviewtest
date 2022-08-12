@@ -12,6 +12,7 @@ class TrendingCard extends StatefulWidget {
 }
 
 class _TrendingCardState extends State<TrendingCard> {
+  Color selectedColor=Colors.white;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +27,8 @@ class _TrendingCardState extends State<TrendingCard> {
                 height: MediaQuery.of(context).size.width / 4,
                 width: MediaQuery.of(context).size.width / 3,
                 child: FittedBox(
-                  child: Image.asset("assets/images/pale_sofa.png"),
+                  child: ColorFiltered(colorFilter: ColorFilter.mode(selectedColor, BlendMode.modulate),
+                  child: Image.asset("assets/images/pale_sofa.png")),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -78,12 +80,27 @@ class _TrendingCardState extends State<TrendingCard> {
                         children: [
                           ColorBox(
                             color: Colors.deepPurpleAccent,
+                            onTap: () {
+                              setState(() {
+                                selectedColor = Colors.deepPurpleAccent;
+                              });
+                            },
                           ),
                           ColorBox(
                             color: Colors.purple,
+                            onTap: () {
+                              setState(() {
+                                selectedColor = Colors.purple;
+                              });
+                            },
                           ),
                           ColorBox(
                             color: Colors.yellowAccent,
+                            onTap: () {
+                              setState(() {
+                                selectedColor = Colors.yellowAccent;
+                              });
+                            },
                           ),
                         ],
                       ))
